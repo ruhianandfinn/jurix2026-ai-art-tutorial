@@ -4,133 +4,245 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art, Algorithms, and Ownership | JURIX 2026 Tutorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1e3a8a;
-      --secondary: #0d9488;
-      --dark: #0f172a;
-      --light: #f8fafc;
-      --gray: #64748b;
-      --border: #e2e8f0;
+      --bg-main: #090d16;
+      --bg-card: rgba(18, 24, 38, 0.7);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --accent-cyan: #00f2fe;
+      --accent-purple: #8b5cf6;
+      --accent-emerald: #10b981;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --gradient-primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+      --gradient-glow: linear-gradient(135deg, rgba(0,242,254,0.15) 0%, rgba(139,92,246,0.15) 100%);
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: var(--dark); background: var(--light); }
-    header { background: var(--primary); color: white; padding: 3rem 1.5rem; text-align: center; }
-    header h1 { font-size: 2.2rem; margin-bottom: 0.75rem; line-height: 1.2; }
-    header p { font-size: 1.1rem; opacity: 0.9; max-width: 800px; margin: 0 auto; }
-    .meta-bar { background: #172554; color: #93c5fd; padding: 0.75rem; text-align: center; font-size: 0.95rem; }
-    .container { max-width: 1000px; margin: 2rem auto; padding: 0 1.5rem; }
-    section { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    h2 { color: var(--primary); margin-bottom: 1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
-    h3 { color: var(--secondary); margin: 1.2rem 0 0.5rem 0; }
-    ul { margin-left: 1.5rem; margin-bottom: 1rem; }
-    li { margin-bottom: 0.4rem; }
-    .timeline { border-left: 3px solid var(--secondary); padding-left: 1.5rem; margin: 1.5rem 0; }
-    .timeline-item { margin-bottom: 1.5rem; position: relative; }
-    .timeline-item::before { content: ''; position: absolute; left: -1.95rem; top: 0.3rem; width: 12px; height: 12px; border-radius: 50%; background: var(--secondary); }
-    .badge { background: #ccfbf1; color: #0f766e; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: bold; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
-    .reading-list { max-height: 400px; overflow-y: auto; background: var(--light); padding: 1rem; border: 1px solid var(--border); border-radius: 6px; }
-    footer { text-align: center; padding: 2rem; color: var(--gray); font-size: 0.9rem; }
-  </style>
-</head>
-<body>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.7;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 65%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+      padding-bottom: 4rem;
+    }
 
-  <header>
-    <h1>Art, Algorithms, and Ownership:<br>Navigating Artist Rights and AI Data Mining Across EU and US Frameworks</h1>
-    <p>JURIX 2026 Spotlight Tutorial (90 Minutes)</p>
-  </header>
+    /* Header / Hero */
+    header {
+      padding: 5rem 1.5rem 3.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      border-bottom: 1px solid var(--border-card);
+      background: radial-gradient(ellipse at top, rgba(30, 41, 59, 0.5), transparent);
+    }
 
-  <div class="meta-bar">
-    <strong>Presenter:</strong> Ruhi Anand Finn | ADAPT Centre, Trinity College Dublin | 
-    <a href="mailto:rufinn@tcd.ie" style="color: #93c5fd;">rufinn@tcd.ie</a>
-  </div>
+    .conference-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      color: var(--accent-cyan);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
 
-  <div class="container">
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      max-width: 950px;
+      margin: 0 auto 1.5rem auto;
+    }
 
-    <!-- Abstract & Motivation -->
-    <section id="overview">
-      <h2>Overview & Motivation</h2>
-      <p>Generative AI presents an existential inflection point for creative labor. As generative models rely heavily on vast datasets of human-created art for training, artists face unprecedented challenges regarding the unauthorized exploitation of visual styles, moral rights, and economic livelihoods.</p>
-      <p style="margin-top: 1rem;">This tutorial bridges high-level policy, judicial precedent, and grassroots creative practice, demystifying how algorithms interact with intellectual property law across EU and US jurisdictions.</p>
-    </section>
+    .subtitle {
+      color: var(--accent-cyan);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
 
-    <!-- Learning Outcomes & Audience -->
-    <div class="grid-2">
-      <section>
-        <h2>Key Learning Outcomes</h2>
-        <ul>
-          <li>Analyse operational differences between EU and US regulatory frameworks.</li>
-          <li>Evaluate judicial tests for original human authorship in AI-assisted works.</li>
-          <li>Co-design scalable policy and technical mechanisms to govern training data collection.</li>
-        </ul>
-      </section>
+    .author-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+    }
 
-      <section>
-        <h2>Target Audience</h2>
-        <p>Designed for artists, researchers, legal scholars, practitioners, and policy analysts attending JURIX 2026 seeking to bridge IP doctrine with practical policy design.</p>
-      </section>
-    </div>
+    .author-card a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .author-card a:hover { opacity: 0.8; }
 
-    <!-- Agenda / Schedule -->
-    <section id="schedule">
-      <h2>Tutorial Program & Schedule</h2>
-      <div class="timeline">
-        
-        <div class="timeline-item">
-          <span class="badge">20 mins (15m Pres + 5m Q&A)</span>
-          <h3>Section 1: Foundations of Artists’ IP Rights and Comparative Frameworks</h3>
-          <p>Berne Convention, Moral & Economic rights. Comparative breakdown of EU law (Infopaq, Levola Hengelo, Cofemel, DSMD, EU AI Act) vs. US approach (NYT v. Microsoft, Warhol v. Goldsmith, Fair Use, Transformative Use).</p>
-        </div>
+    /* Layout Container */
+    .container {
+      max-width: 1100px;
+      margin: 3rem auto 0 auto;
+      padding: 0 1.5rem;
+    }
 
-        <div class="timeline-item">
-          <span class="badge">20 mins (15m Pres + 5m Q&A)</span>
-          <h3>Section 2: AI in the Creative Process and Judicial Review</h3>
-          <p>Four-step criteria for copyright protection (Domain, Authorship, Originality, Expression). Application to AI outputs: Qualified Person Test (Nova Productions, Acohs) and Originality (Painer case).</p>
-        </div>
+    /* Cards & Sections */
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.2rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
 
-        <div class="timeline-item">
-          <span class="badge">20 mins (15m Pres + 5m Q&A)</span>
-          <h3>Section 3: Training Data, Text & Data Mining (TDM), and Implications</h3>
-          <p>Model training, Creative Commons, web scraping, Sui Generis rights, TDM exceptions, and case studies on misuse (LAION, LLaMA).</p>
-        </div>
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: var(--gradient-primary);
+      opacity: 0.7;
+    }
 
-        <div class="timeline-item">
-          <span class="badge">30 mins</span>
-          <h3>Section 4: Interactive Policy Lab & Governance Brainstorm</h3>
-          <p>Collaborative workshop in quads tailored for Artists, AI Developers, Regulators, and Policymakers. Focus on opt-in frameworks, data provenance, and equitable remuneration schemes.</p>
-        </div>
+    section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
 
-      </div>
-    </section>
+    /* Grid layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+    }
+    @media (max-width: 850px) { .grid-2 { grid-template-columns: 1fr; } }
 
-    <!-- Primary Sources & Secondary Literature -->
-    <section id="readings">
-      <h2>Key Readings & Primary Sources</h2>
-      <h3>Primary Legislation & EU/US Case Law</h3>
-      <div class="reading-list">
-        <ul>
-          <li><strong>Directive (EU) 2019/790</strong> on Copyright in the Digital Single Market (DSMD)</li>
-          <li><strong>Regulation (EU) 2024/1689</strong> (EU Artificial Intelligence Act)</li>
-          <li>Case C-05/08 – <em>Infopaq International</em> (ECLI:EU:C:2009:465)</li>
-          <li>Case C-310/17 – <em>Levola Hengelo</em> (ECLI:EU:C:2018:899)</li>
-          <li>Case C-683/17 – <em>Cofemel</em> (ECLI:EU:C:2019:721)</li>
-          <li>Case C-833/18 – <em>Brompton Bicycle</em> (ECLI:EU:C:2020:461)</li>
-          <li>Case C-145/10 – <em>Painer</em> (ECLI:EU:2013:138)</li>
-          <li><em>Andy Warhol Foundation v. Goldsmith</em> (2023) SC OP 21-869</li>
-          <li><em>New York Times Co. v. Microsoft et al.</em> (2025) 1:23-cv-11195</li>
-          <li><em>Nova Productions Ltd v Mazooma Games Ltd</em> [2007] EWCA Civ 219</li>
-          <li><em>Acohs Pty Ltd v Ucorp Pty Ltd</em> [2012] FCAFC 16</li>
-        </ul>
-      </div>
-    </section>
+    /* Key Metrics / Highlights */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .stat-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-card);
+      padding: 1.2rem;
+      border-radius: 12px;
+      border-left: 3px solid var(--accent-cyan);
+    }
+    .stat-box h4 { color: var(--accent-cyan); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-box p { color: var(--text-main); font-weight: 600; font-size: 1.05rem; margin-top: 0.3rem; }
 
-  </div>
+    /* Accordion Timeline */
+    .accordion-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .accordion-item:hover { border-color: rgba(0, 242, 254, 0.3); }
+    .accordion-header {
+      padding: 1.2rem 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.1rem;
+      user-select: none;
+    }
+    .accordion-header .time-pill {
+      background: rgba(139, 92, 246, 0.2);
+      color: #c084fc;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .accordion-body {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+      display: none;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .accordion-body ul { margin-left: 1.2rem; margin-top: 0.8rem; }
+    .accordion-body li { margin-bottom: 0.4rem; }
 
-  <footer>
-    <p>&copy; 2026 Ruhi Anand Finn | JURIX 2026 Tutorial</p>
-  </footer>
+    /* Interactive Policy Lab (Quad Selector) */
+    .quad-nav {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .quad-btn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-card);
+      color: var(--text-muted);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.25s;
+    }
+    .quad-btn:hover, .quad-btn.active {
+      background: var(--gradient-primary);
+      color: #000;
+      border-color: transparent;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    }
+    .quad-content-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      min-height: 160px;
+    }
 
-</body>
-</html>
+    /* Bibliography Section */
+    .bibo-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 250px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border-card);
+      color: #fff;
+      padding: 0.7rem 1.2rem;
+      border-radius: 8px;
+      outline: none;
+    }
+    .search-input:focus { border-
