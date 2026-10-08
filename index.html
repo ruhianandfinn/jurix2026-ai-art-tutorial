@@ -4,360 +4,405 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art, Algorithms, and Ownership | JURIX 2026 Tutorial</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-main: #090d16;
-      --bg-card: rgba(18, 24, 38, 0.7);
-      --border-card: rgba(255, 255, 255, 0.08);
-      --accent-cyan: #00f2fe;
-      --accent-purple: #8b5cf6;
-      --accent-emerald: #10b981;
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --gradient-primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-      --gradient-glow: linear-gradient(135deg, rgba(0,242,254,0.15) 0%, rgba(139,92,246,0.15) 100%);
+      --bg-body: #f8f3e6;
+      --bg-card: #fcf8f0;
+      --bg-card-alt: #f3ebd9;
+      --text-main: #221c18;
+      --text-muted: #5a5047;
+      --border-warm: #e2d5c3;
+      --border-dark: #8c7a6b;
+      --accent-terracotta: #a84323;
+      --accent-sage: #3d5a45;
+      --accent-navy: #1b365d;
+      --shadow-paper: 0 4px 20px rgba(60, 45, 30, 0.06);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-main);
+      font-family: Cambria, 'Georgia', 'Times New Roman', serif;
+      background-color: var(--bg-body);
       color: var(--text-main);
-      line-height: 1.7;
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 65%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
-      background-attachment: fixed;
-      padding-bottom: 4rem;
+      line-height: 1.75;
+      padding-bottom: 5rem;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Header / Hero */
+    /* Header & Hero Section */
     header {
-      padding: 5rem 1.5rem 3.5rem 1.5rem;
+      background-color: #f2e9d8;
+      border-bottom: 2px solid var(--border-warm);
+      padding: 4.5rem 1.5rem 3.5rem 1.5rem;
       text-align: center;
       position: relative;
-      border-bottom: 1px solid var(--border-card);
-      background: radial-gradient(ellipse at top, rgba(30, 41, 59, 0.5), transparent);
     }
 
-    .conference-badge {
+    header::after {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 3px;
+      background: var(--accent-terracotta);
+      margin: 2rem auto 0 auto;
+      border-radius: 2px;
+    }
+
+    .venue-badge {
       display: inline-block;
-      padding: 0.35rem 1rem;
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid rgba(0, 242, 254, 0.3);
-      color: var(--accent-cyan);
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: Cambria, serif;
+      font-style: italic;
+      color: var(--accent-terracotta);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
     }
 
     h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 4.5vw, 3.4rem);
-      font-weight: 700;
-      line-height: 1.2;
-      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      max-width: 950px;
-      margin: 0 auto 1.5rem auto;
+      font-family: Cambria, 'Georgia', serif;
+      font-size: clamp(2.1rem, 4vw, 3.1rem);
+      font-weight: normal;
+      line-height: 1.25;
+      color: var(--text-main);
+      max-width: 920px;
+      margin: 0 auto 1.2rem auto;
     }
 
     .subtitle {
-      color: var(--accent-cyan);
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      color: var(--accent-navy);
+      font-style: italic;
       margin-bottom: 2rem;
     }
 
-    .author-card {
-      display: inline-flex;
-      align-items: center;
-      gap: 1rem;
+    .author-box {
+      display: inline-block;
       background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      padding: 0.8rem 1.5rem;
-      border-radius: 50px;
-      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-warm);
+      padding: 0.75rem 1.8rem;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      box-shadow: var(--shadow-paper);
     }
 
-    .author-card a {
-      color: var(--accent-cyan);
+    .author-box a {
+      color: var(--accent-terracotta);
       text-decoration: none;
-      transition: opacity 0.2s;
+      border-bottom: 1px dotted var(--accent-terracotta);
     }
-    .author-card a:hover { opacity: 0.8; }
 
-    /* Layout Container */
+    /* Main Container */
     .container {
-      max-width: 1100px;
-      margin: 3rem auto 0 auto;
+      max-width: 960px;
+      margin: 3.5rem auto 0 auto;
       padding: 0 1.5rem;
     }
 
-    /* Cards & Sections */
-    .glass-card {
+    /* Paper Cards */
+    .paper-card {
       background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 16px;
-      padding: 2.2rem;
+      border: 1px solid var(--border-warm);
+      border-radius: 6px;
+      padding: 2.25rem;
       margin-bottom: 2.5rem;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      box-shadow: var(--shadow-paper);
       position: relative;
-      overflow: hidden;
     }
 
-    .glass-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 2px;
-      background: var(--gradient-primary);
-      opacity: 0.7;
-    }
-
-    section-title {
+    .section-title {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.6rem;
-      color: #fff;
+      gap: 0.85rem;
+      font-size: 1.65rem;
+      color: var(--accent-navy);
+      border-bottom: 1px solid var(--border-warm);
+      padding-bottom: 0.75rem;
       margin-bottom: 1.5rem;
+      font-weight: normal;
     }
 
-    /* Grid layout */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.8rem;
+    .section-icon {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: var(--accent-terracotta);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
     }
-    @media (max-width: 850px) { .grid-2 { grid-template-columns: 1fr; } }
 
-    /* Key Metrics / Highlights */
-    .stats-grid {
+    /* Key Information Highlight Grid */
+    .info-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.2rem;
-      margin-top: 1.5rem;
+      margin-top: 1.8rem;
     }
-    .stat-box {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-card);
-      padding: 1.2rem;
-      border-radius: 12px;
-      border-left: 3px solid var(--accent-cyan);
-    }
-    .stat-box h4 { color: var(--accent-cyan); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    .stat-box p { color: var(--text-main); font-weight: 600; font-size: 1.05rem; margin-top: 0.3rem; }
 
-    /* Accordion Timeline */
+    .info-box {
+      background: var(--bg-card-alt);
+      border-left: 3px solid var(--accent-terracotta);
+      padding: 1.1rem;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .info-box h4 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-terracotta);
+      margin-bottom: 0.25rem;
+      font-weight: bold;
+    }
+
+    .info-box p {
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    /* Agenda Accordion */
     .accordion-item {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-card);
-      border-radius: 12px;
+      border: 1px solid var(--border-warm);
+      background: #fffdfa;
+      border-radius: 4px;
       margin-bottom: 1rem;
       overflow: hidden;
-      transition: border-color 0.3s;
     }
-    .accordion-item:hover { border-color: rgba(0, 242, 254, 0.3); }
+
     .accordion-header {
       padding: 1.2rem 1.5rem;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-weight: 700;
-      color: #fff;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      color: var(--text-main);
+      background: #faf4e8;
+      transition: background 0.2s;
       user-select: none;
     }
-    .accordion-header .time-pill {
-      background: rgba(139, 92, 246, 0.2);
-      color: #c084fc;
-      padding: 0.2rem 0.7rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-    .accordion-body {
-      padding: 0 1.5rem 1.5rem 1.5rem;
-      display: none;
-      color: var(--text-muted);
-      border-top: 1px solid rgba(255,255,255,0.05);
-      background: rgba(0, 0, 0, 0.2);
-    }
-    .accordion-body ul { margin-left: 1.2rem; margin-top: 0.8rem; }
-    .accordion-body li { margin-bottom: 0.4rem; }
 
-    /* Interactive Policy Lab (Quad Selector) */
-    .quad-nav {
+    .accordion-header:hover {
+      background: #f2e7d3;
+    }
+
+    .time-badge {
+      font-size: 0.85rem;
+      background: var(--accent-sage);
+      color: #ffffff;
+      padding: 0.2rem 0.65rem;
+      border-radius: 3px;
+      font-family: Cambria, serif;
+      white-space: nowrap;
+    }
+
+    .accordion-body {
+      padding: 1.5rem;
+      display: none;
+      border-top: 1px solid var(--border-warm);
+      background: var(--bg-card);
+      color: var(--text-muted);
+    }
+
+    .accordion-body ul {
+      margin-left: 1.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .accordion-body li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Policy Lab Simulator (Quad Selector) */
+    .quad-tabs {
       display: flex;
-      gap: 0.8rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
       margin-bottom: 1.5rem;
     }
+
     .quad-btn {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border-card);
-      color: var(--text-muted);
+      font-family: Cambria, serif;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-warm);
+      color: var(--text-main);
       padding: 0.6rem 1.2rem;
-      border-radius: 8px;
+      border-radius: 4px;
       cursor: pointer;
-      font-weight: 600;
-      transition: all 0.25s;
+      font-size: 1rem;
+      transition: all 0.2s;
     }
+
     .quad-btn:hover, .quad-btn.active {
-      background: var(--gradient-primary);
-      color: #000;
-      border-color: transparent;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+      background: var(--accent-navy);
+      color: #ffffff;
+      border-color: var(--accent-navy);
     }
-    .quad-content-box {
-      background: rgba(0,0,0,0.3);
-      border: 1px solid var(--border-card);
-      border-radius: 12px;
+
+    .quad-content {
+      background: #fffdfa;
+      border: 1px solid var(--border-warm);
       padding: 1.5rem;
-      min-height: 160px;
+      border-radius: 4px;
+      min-height: 140px;
     }
 
     /* Bibliography Section */
-    .bibo-controls {
+    .bibo-tools {
       display: flex;
       gap: 1rem;
       margin-bottom: 1.5rem;
       flex-wrap: wrap;
     }
-    .search-input {
+
+    .search-bar {
       flex: 1;
-      min-width: 250px;
-      background: rgba(0,0,0,0.4);
-      border: 1px solid var(--border-card);
-      color: #fff;
-      padding: 0.7rem 1.2rem;
-      border-radius: 8px;
+      min-width: 260px;
+      font-family: Cambria, serif;
+      background: #fffdfa;
+      border: 1px solid var(--border-warm);
+      color: var(--text-main);
+      padding: 0.65rem 1rem;
+      border-radius: 4px;
+      font-size: 1rem;
       outline: none;
     }
-    .search-input:focus { border-color: var(--accent-cyan); }
-    .filter-btn {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-card);
-      color: var(--text-muted);
-      padding: 0.7rem 1rem;
-      border-radius: 8px;
+
+    .search-bar:focus {
+      border-color: var(--accent-terracotta);
+    }
+
+    .tag-filter-btn {
+      font-family: Cambria, serif;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-warm);
+      color: var(--text-main);
+      padding: 0.65rem 1rem;
+      border-radius: 4px;
       cursor: pointer;
+      font-size: 0.95rem;
     }
-    .filter-btn.active {
-      background: var(--accent-purple);
-      color: #fff;
-      border-color: transparent;
+
+    .tag-filter-btn.active {
+      background: var(--accent-terracotta);
+      color: #ffffff;
+      border-color: var(--accent-terracotta);
     }
-    .bibo-list {
+
+    .bibo-scroll {
       max-height: 520px;
       overflow-y: auto;
-      padding-right: 0.5rem;
+      padding-right: 0.4rem;
     }
-    .bibo-item {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border-card);
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 0.8rem;
+
+    .bibo-entry {
+      background: #fffdfa;
+      border: 1px solid var(--border-warm);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.85rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 1rem;
-      transition: background 0.2s;
     }
-    .bibo-item:hover { background: rgba(255,255,255,0.04); }
+
     .bibo-tag {
-      font-size: 0.7rem;
+      display: inline-block;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+
+    .tag-legis { background: #e2ece9; color: var(--accent-sage); }
+    .tag-case { background: #e0e8f5; color: var(--accent-navy); }
+    .tag-sec { background: #f5eae0; color: var(--accent-terracotta); }
+
+    .cite-copy-btn {
+      font-family: Cambria, serif;
+      background: transparent;
+      border: 1px solid var(--border-warm);
+      color: var(--text-muted);
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.85rem;
       white-space: nowrap;
     }
-    .tag-legis { background: rgba(16, 185, 129, 0.2); color: #34d399; }
-    .tag-case { background: rgba(0, 242, 254, 0.2); color: #38bdf8; }
-    .tag-sec { background: rgba(139, 92, 246, 0.2); color: #c084fc; }
 
-    .copy-btn {
-      background: transparent;
-      border: 1px solid var(--border-card);
-      color: var(--text-muted);
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.75rem;
+    .cite-copy-btn:hover {
+      background: var(--bg-card-alt);
+      color: var(--text-main);
     }
-    .copy-btn:hover { color: #fff; border-color: #fff; }
 
-    /* Scrollbar Styling */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-main); }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="conference-badge">JURIX 2026 Spotlight Tutorial</div>
-    <h1>Art, Algorithms, and Ownership:<br>Navigating Artist Rights & AI Data Mining</h1>
-    <div class="subtitle">Comparing EU & US Legal Frameworks for Generative AI</div>
+    <div class="venue-badge">JURIX 2026 Spotlight Tutorial • 90 Minutes</div>
+    <h1>Art, Algorithms, and Ownership:<br>Navigating Artist Rights and AI Data Mining Across EU and US Frameworks</h1>
+    <div class="subtitle">A Comparative Exploration of IP Law, Judicial Precedents, and AI Policy</div>
     
-    <div class="author-card">
-      <div><strong>Ruhi Anand Finn</strong> | ADAPT Centre, Trinity College Dublin</div>
-      <div>•</div>
-      <a href="mailto:rufinn@tcd.ie">rufinn@tcd.ie</a>
+    <div class="author-box">
+      <strong>Ruhi Anand Finn</strong> — ADAPT Centre, Trinity College Dublin (<a href="mailto:rufinn@tcd.ie">rufinn@tcd.ie</a>)
     </div>
   </header>
 
   <div class="container">
 
-    <!-- Abstract & Motivation -->
-    <div class="glass-card">
-      <div class="section-title">✨ Session Abstract & Motivation</div>
-      <p>Generative AI represents an existential inflection point for creative labor. As generative models rely heavily on vast datasets of human-created art for training, artists face unprecedented challenges regarding the unauthorized exploitation of visual styles, moral rights, and economic livelihoods.</p>
-      
-      <div class="stats-grid">
-        <div class="stat-box">
-          <h4>Duration</h4>
-          <p>90 Minutes Spotlight</p>
+    <!-- Overview Section -->
+    <div class="paper-card">
+      <div class="section-title">
+        <svg class="section-icon" viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L11 18l7-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+        Overview & Motivation
+      </div>
+      <p>Generative AI presents an existential inflection point for creative labor. As generative models rely heavily on vast datasets of human-created art for training, artists face unprecedented challenges regarding the unauthorized exploitation of their visual styles, moral rights, and economic livelihoods.</p>
+      <p style="margin-top: 1rem;">This tutorial bridges high-level policy, judicial precedent, and grassroots creative practice—demystifying how algorithms interact with intellectual property law so that creators, legal scholars, and developers can navigate AI governance strategically.</p>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>Target Audience</h4>
+          <p>Artists, legal scholars, AI researchers, practitioners, and policy analysts attending JURIX 2026.</p>
         </div>
-        <div class="stat-box">
-          <h4>Jurisdictions</h4>
-          <p>EU, US, UK, Australia</p>
-        </div>
-        <div class="stat-box">
-          <h4>Core Focus</h4>
-          <p>TDM, Author Rights, AI Policy</p>
+        <div class="info-box">
+          <h4>Key Outcome</h4>
+          <p>Evaluate human authorship tests and co-design practical TDM policy recommendations.</p>
         </div>
       </div>
     </div>
 
-    <!-- Agenda Breakdown (Accordion) -->
-    <div class="glass-card">
-      <div class="section-title">📅 Tutorial Program & Agenda</div>
-      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Click any section below to inspect detailed topics, case laws, and timings.</p>
+    <!-- Tutorial Schedule -->
+    <div class="paper-card">
+      <div class="section-title">
+        <svg class="section-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        Tutorial Structure & Agenda
+      </div>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Click each module below to view detailed topics, statutory frameworks, and case precedents:</p>
 
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
           <span>1. Foundations of Artists' IP Rights & Comparative Frameworks</span>
-          <span class="time-pill">20 Mins (15m Pres + 5m Q&A)</span>
+          <span class="time-badge">20 Mins (15m Pres + 5m Q&A)</span>
         </div>
         <div class="accordion-body">
           <ul>
-            <li><strong>Berne Convention:</strong> Core IP protections, moral rights vs economic rights.</li>
-            <li><strong>EU Framework:</strong> CJEU Jurisprudence (Infopaq C-05/08, Levola Hengelo C-310/17, Funke Medien C-469/17, Cofemel C-683/17, Brompton Bicycle C-833/18), Copyright DSM Directive 2019/790, EU AI Act 2024/1689.</li>
-            <li><strong>US Framework:</strong> Common law copyright, New York Times v. Microsoft (2025), Andy Warhol v. Goldsmith (2023), Fair Use & Transformative Use doctrines.</li>
+            <li><strong>Berne Convention & IP Basics:</strong> Overview of copyright protections, moral rights, and economic rights for visual artists.</li>
+            <li><strong>EU Legal Architecture:</strong> Key CJEU precedents (<em>Infopaq</em> C-05/08, <em>Levola Hengelo</em> C-310/17, <em>Funke Medien</em> C-469/17, <em>Cofemel</em> C-683/17, <em>Brompton Bicycle</em> C-833/18), Directive (EU) 2019/790 (DSMD), and EU AI Act Regulation (EU) 2024/1689.</li>
+            <li><strong>US Legal Approach:</strong> Common law copyright, Fair Use doctrine, Transformative Use doctrine, and pivotal litigations (<em>NYT v. Microsoft</em> 2025, <em>Andy Warhol Foundation v. Goldsmith</em> 2023).</li>
           </ul>
         </div>
       </div>
@@ -365,12 +410,12 @@
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
           <span>2. AI in the Creative Process & Judicial Review</span>
-          <span class="time-pill">20 Mins (15m Pres + 5m Q&A)</span>
+          <span class="time-badge">20 Mins (15m Pres + 5m Q&A)</span>
         </div>
         <div class="accordion-body">
           <ul>
-            <li><strong>Four-Step Criteria:</strong> Domain Test, Human Authorship Requirement, Originality, and Expression.</li>
-            <li><strong>Applying Tests to Hybrid AI Work:</strong> Qualified Person Test (Nova Productions v. Mazooma Games, Acohs v. Ucorp) and Originality standards (Painer C-145/10).</li>
+            <li><strong>Four-Step Copyrightability Test:</strong> Evaluating Domain, Human Authorship Requirement, Originality, and Expression in hybrid outputs.</li>
+            <li><strong>Judicial Review Standards:</strong> Applying the Qualified Person Test (<em>Nova Productions v. Mazooma Games</em>, <em>Acohs v. Ucorp</em>) and originality thresholds (<em>Painer</em> C-145/10).</li>
           </ul>
         </div>
       </div>
@@ -378,341 +423,348 @@
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
           <span>3. Training Data, Text & Data Mining (TDM), & Implications</span>
-          <span class="time-pill">20 Mins (15m Pres + 5m Q&A)</span>
+          <span class="time-badge">20 Mins (15m Pres + 5m Q&A)</span>
         </div>
         <div class="accordion-body">
           <ul>
-            <li><strong>Ingestion Mechanics:</strong> Web crawling/scraping, Creative Commons licenses, Sui Generis database protections.</li>
-            <li><strong>TDM Battlegrounds:</strong> EU TDM exceptions vs. US Fair Use defense. Case studies on LAION group and LLaMA training sets.</li>
+            <li><strong>Data Ingestion Realities:</strong> Model training mechanics, web crawling/scraping, Creative Commons boundaries, and Sui Generis database protections.</li>
+            <li><strong>TDM Battlegrounds:</strong> EU TDM exceptions vs. US Fair Use defenses. Case analysis of dataset misuse (e.g., LAION datasets, LLaMA model training).</li>
           </ul>
         </div>
       </div>
 
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>4. Interactive Policy Lab & Governance Brainstorm</span>
-          <span class="time-pill">30 Mins Group Activity</span>
+          <span>4. Interactive Policy Lab & TDM Governance Brainstorm</span>
+          <span class="time-badge">30 Mins Workshop</span>
         </div>
         <div class="accordion-body">
           <ul>
-            <li><strong>Quad Breakout Session:</strong> Attendees divide into 4 stakeholder groups to formulate governance blueprints.</li>
-            <li><strong>Countermeasure Strategy:</strong> Developing opt-in frameworks, data provenance metadata standards, and equitable remuneration schemes.</li>
+            <li><strong>Guided Quad Workshop:</strong> Attendees divide into breakout groups (Quads) focusing on four distinct stakeholder perspectives: Artists, AI Developers, Regulators, and Policymakers.</li>
+            <li><strong>Policy Design Focus:</strong> Formulating counter-measures including opt-in frameworks, data provenance standards, and equitable remuneration schemes.</li>
           </ul>
         </div>
       </div>
 
     </div>
 
-    <!-- Interactive Policy Lab Selector -->
-    <div class="glass-card">
-      <div class="section-title">🧪 Interactive Policy Lab Simulator</div>
-      <p style="color: var(--text-muted); margin-bottom: 1rem;">Select a stakeholder role below to explore key policy goals and countermeasures during Section 4:</p>
+    <!-- Policy Lab Interactive Quad Simulator -->
+    <div class="paper-card">
+      <div class="section-title">
+        <svg class="section-icon" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M19 6l-7 7-7-7"></path></svg>
+        Interactive Policy Lab: Stakeholder Quads
+      </div>
+      <p style="color: var(--text-muted); margin-bottom: 1.2rem;">Select a stakeholder quad below to preview the policy objectives and governance mechanisms explored in Section 4:</p>
 
-      <div class="quad-nav">
+      <div class="quad-tabs">
         <button class="quad-btn active" onclick="switchQuad('artists', this)">🎨 Artists Quad</button>
         <button class="quad-btn" onclick="switchQuad('developers', this)">💻 AI Developers Quad</button>
         <button class="quad-btn" onclick="switchQuad('regulators', this)">⚖️ Regulators Quad</button>
         <button class="quad-btn" onclick="switchQuad('policymakers', this)">🏛️ Policymakers Quad</button>
       </div>
 
-      <div class="quad-content-box" id="quad-display">
-        <!-- Content dynamic via JS -->
+      <div class="quad-content" id="quadDisplay">
+        <!-- JS populated content -->
       </div>
     </div>
 
-    <!-- Complete Searchable Bibliography -->
-    <div class="glass-card">
-      <div class="section-title">📚 Comprehensive Bibliography & Sources</div>
-      
-      <div class="bibo-controls">
-        <input type="text" class="search-input" id="biboSearch" placeholder="Search by author, case name, directive, or keyword..." onkeyup="filterBibo()">
-        <button class="filter-btn active" onclick="filterBiboTag('all', this)">All (31)</button>
-        <button class="filter-btn" onclick="filterBiboTag('legis', this)">Legislation</button>
-        <button class="filter-btn" onclick="filterBiboTag('case', this)">Case Law</button>
-        <button class="filter-btn" onclick="filterBiboTag('sec', this)">Secondary Literature</button>
+    <!-- Bibliography & Sources -->
+    <div class="paper-card">
+      <div class="section-title">
+        <svg class="section-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        Complete List of Readings & Primary Sources
       </div>
 
-      <div class="bibo-list" id="biboList">
+      <div class="bibo-tools">
+        <input type="text" class="search-bar" id="biboSearch" placeholder="Search by case name, author, directive, or legal topic..." onkeyup="filterBibo()">
+        <button class="tag-filter-btn active" onclick="filterTag('all', this)">All Sources (31)</button>
+        <button class="tag-filter-btn" onclick="filterTag('legis', this)">Legislation</button>
+        <button class="tag-filter-btn" onclick="filterTag('case', this)">Case Law</button>
+        <button class="tag-filter-btn" onclick="filterTag('sec', this)">Secondary Literature</button>
+      </div>
+
+      <div class="bibo-scroll" id="biboContainer">
+
         <!-- Legislation -->
-        <div class="bibo-item" data-tag="legis">
+        <div class="bibo-entry" data-tag="legis">
           <div>
             <span class="bibo-tag tag-legis">Legislation</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">Directive (EU) 2019/790 on Copyright and Related Rights in the Digital Single Market (DSMD)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">PE/51/2019/REV/1 OJ L 130</div>
+            <div style="font-weight: bold;">Directive (EU) 2019/790 on Copyright and Related Rights in the Digital Single Market (DSMD)</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">PE/51/2019/REV/1 OJ L 130</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Directive (EU) 2019/790 on Copyright and Related Rights in the Digital Single Market (DSMD)')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Directive (EU) 2019/790 on Copyright and Related Rights in the Digital Single Market (DSMD)')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="legis">
+        <div class="bibo-entry" data-tag="legis">
           <div>
             <span class="bibo-tag tag-legis">Legislation</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">Regulation (EU) 2024/1689 (Artificial Intelligence Act)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">European Parliament and Council, PE/24/2024/REV/1 OJ L 2024/1689</div>
+            <div style="font-weight: bold;">Regulation (EU) 2024/1689 (Artificial Intelligence Act)</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">European Parliament and Council, PE/24/2024/REV/1 OJ L 2024/1689</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Regulation (EU) 2024/1689 (Artificial Intelligence Act)')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Regulation (EU) 2024/1689 (Artificial Intelligence Act)')">Copy Citation</button>
         </div>
 
         <!-- Case Law -->
-        <div class="bibo-item" data-tag="case">
+        <div class="bibo-entry" data-tag="case">
           <div>
             <span class="bibo-tag tag-case">Case Law</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">Infopaq International v. Danske Dagblades Forening (2009)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Case C-05/08, ECLI:EU:C:2009:465</div>
+            <div style="font-weight: bold;">Infopaq International v. Danske Dagblades Forening (2009)</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Case C-05/08, ECLI:EU:C:2009:465</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Case C-05/08 Infopaq International v. Danske Dagblades Forening (2009)')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Case C-05/08 Infopaq International v. Danske Dagblades Forening (2009)')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="case">
+        <div class="bibo-entry" data-tag="case">
           <div>
             <span class="bibo-tag tag-case">Case Law</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">Levola Hengelo (2018)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Case C-310/17, ECLI:EU:C:2018:899</div>
+            <div style="font-weight: bold;">Levola Hengelo (2018)</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Case C-310/17, ECLI:EU:C:2018:899</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Case C-310/17 Levola Hengelo (2018)')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Case C-310/17 Levola Hengelo (2018)')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="case">
+        <div class="bibo-entry" data-tag="case">
           <div>
             <span class="bibo-tag tag-case">Case Law</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">Funke Medien NRW GmbH v. Bundesrepublik Deutschland (2019)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Case C-469/17, ECLI:EU:C:2019:623</div>
+            <div style="font-weight: bold;">Funke Medien NRW GmbH v. Bundesrepublik Deutschland (2019)</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Case C-469/17, ECLI:EU:C:2019:623</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Case C-469/17 Funke Medien NRW GmbH (2019)')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Case C-469/17 Funke Medien NRW GmbH (2019)')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="case">
+        <div class="bibo-entry" data-tag="case">
           <div>
             <span class="bibo-tag tag-case">Case Law</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">Cofemel - Sociedade de Vestuário SA v. G-Star Raw CV (2019)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Case C-683/17, ECLI:EU:C:2019:721</div>
+            <div style="font-weight: bold;">Cofemel - Sociedade de Vestuário SA v. G-Star Raw CV (2019)</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Case C-683/17, ECLI:EU:C:2019:721</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Case C-683/17 Cofemel v. G-Star Raw (2019)')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Case C-683/17 Cofemel v. G-Star Raw (2019)')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="case">
+        <div class="bibo-entry" data-tag="case">
           <div>
             <span class="bibo-tag tag-case">Case Law</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">SI and Brompton Bicycle Ltd v. Chedech / Get2Get (2020)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Case C-833/18, ECLI:EU:C:2020:461</div>
+            <div style="font-weight: bold;">SI and Brompton Bicycle Ltd v. Chedech / Get2Get (2020)</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Case C-833/18, ECLI:EU:C:2020:461</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Case C-833/18 Brompton Bicycle Ltd (2020)')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Case C-833/18 Brompton Bicycle Ltd (2020)')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="case">
+        <div class="bibo-entry" data-tag="case">
           <div>
             <span class="bibo-tag tag-case">Case Law</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">Painer (2011)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Case C-145/10, ECLI:EU:2013:138</div>
+            <div style="font-weight: bold;">Painer (2011)</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Case C-145/10, ECLI:EU:2013:138</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Case C-145/10 Painer (2011)')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Case C-145/10 Painer (2011)')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="case">
+        <div class="bibo-entry" data-tag="case">
           <div>
             <span class="bibo-tag tag-case">Case Law</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">New York Times Company v. Microsoft et al. (2025)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">1:23-cv-11195 (SHS), SDNY</div>
+            <div style="font-weight: bold;">New York Times Company v. Microsoft et al. (2025)</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">1:23-cv-11195 (SHS), SDNY</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'New York Times Co. v. Microsoft et al. (2025) 1:23-cv-11195')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'New York Times Co. v. Microsoft et al. (2025) 1:23-cv-11195')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="case">
+        <div class="bibo-entry" data-tag="case">
           <div>
             <span class="bibo-tag tag-case">Case Law</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">Andy Warhol Foundation for the Visual Arts Inc. v. Goldsmith (2023)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">US Supreme Court, SC OP 21-869</div>
+            <div style="font-weight: bold;">Andy Warhol Foundation for the Visual Arts Inc. v. Goldsmith (2023)</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">US Supreme Court, SC OP 21-869</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Andy Warhol Foundation v. Goldsmith (2023) SC OP 21-869')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Andy Warhol Foundation v. Goldsmith (2023) SC OP 21-869')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="case">
+        <div class="bibo-entry" data-tag="case">
           <div>
             <span class="bibo-tag tag-case">Case Law</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">Nova Productions Ltd v. Mazooma Games Ltd [2007]</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">EWCA Civ 219 (UK Court of Appeal)</div>
+            <div style="font-weight: bold;">Nova Productions Ltd v. Mazooma Games Ltd [2007]</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">EWCA Civ 219 (UK Court of Appeal)</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Nova Productions Ltd v Mazooma Games Ltd [2007] EWCA Civ 219')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Nova Productions Ltd v Mazooma Games Ltd [2007] EWCA Civ 219')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="case">
+        <div class="bibo-entry" data-tag="case">
           <div>
             <span class="bibo-tag tag-case">Case Law</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">Acohs Pty Ltd v. Ucorp Pty Ltd [2012]</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">FCAFC 16 (Full Federal Court of Australia)</div>
+            <div style="font-weight: bold;">Acohs Pty Ltd v. Ucorp Pty Ltd [2012]</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">FCAFC 16 (Full Federal Court of Australia)</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Acohs Pty Ltd v Ucorp Pty Ltd [2012] FCAFC 16')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Acohs Pty Ltd v Ucorp Pty Ltd [2012] FCAFC 16')">Copy Citation</button>
         </div>
 
         <!-- Secondary Sources -->
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">ARTISTS, U. 2025. Is This What We Want?</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Online: https://www.isthiswhatwewant.com</div>
+            <div style="font-weight: bold;">ARTISTS, U. 2025. Is This What We Want?</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Available online: https://www.isthiswhatwewant.com</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'ARTISTS, U. 2025. Is This What We Want?')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'ARTISTS, U. 2025. Is This What We Want?')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">BARR, A. 2023. OpenAI just admitted it has a bot that crawls the web to collect AI training data.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Business Insider</div>
+            <div style="font-weight: bold;">BARR, A. 2023. OpenAI just admitted it has a bot that crawls the web to collect AI training data.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Business Insider</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Barr, A. (2023). OpenAI web crawling GPTbot. Business Insider.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Barr, A. (2023). OpenAI web crawling GPTbot. Business Insider.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">BOOTH, R. 2024. UK arts and media reject plan to let AI firms use copyrighted material.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Guardian / UK Arts Policy Report</div>
+            <div style="font-weight: bold;">BOOTH, R. 2024. UK arts and media reject plan to let AI firms use copyrighted material.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">The Guardian / UK Policy Analysis</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Booth, R. (2024). UK arts and media reject plan to let AI firms use copyrighted material.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Booth, R. (2024). UK arts and media reject plan to let AI firms use copyrighted material.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">GERVAIS, D. J. 2022. AI Derivatives: the Application to the Derivative Work Right.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Seton Hall Law Review, 53</div>
+            <div style="font-weight: bold;">GERVAIS, D. J. 2022. AI Derivatives: the Application to the Derivative Work Right to Literary and Artistic Productions.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Seton Hall Law Review, 53</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Gervais, D. J. (2022). AI Derivatives. Seton Hall Law Review, 53.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Gervais, D. J. (2022). AI Derivatives. Seton Hall Law Review, 53.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">HACKER, P. 2021. A legal framework for AI training data—from first principles to the AI Act.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Law, Innovation and Technology, 13, 257-301</div>
+            <div style="font-weight: bold;">HACKER, P. 2021. A legal framework for AI training data—from first principles to the Artificial Intelligence Act.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Law, Innovation and Technology, 13, 257-301</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Hacker, P. (2021). A legal framework for AI training data. Law, Innovation and Tech.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Hacker, P. (2021). A legal framework for AI training data. Law, Innovation and Tech.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">HINE, E., NOVELLI, C., TADDEO, M. & FLORIDI, L. 2024. Supporting Trustworthy AI Through Machine Unlearning.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Science and Engineering Ethics, 30, 43</div>
+            <div style="font-weight: bold;">HINE, E., NOVELLI, C., TADDEO, M. & FLORIDI, L. 2024. Supporting Trustworthy AI Through Machine Unlearning.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Science and Engineering Ethics, 30, 43</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Hine et al. (2024). Supporting Trustworthy AI Through Machine Unlearning.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Hine et al. (2024). Supporting Trustworthy AI Through Machine Unlearning. Sci Eng Ethics.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">HRISTOV, K. 2017. Artificial Intelligence and the Copyright Dilemma.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">IDEA: The IP Law Review, 57</div>
+            <div style="font-weight: bold;">HRISTOV, K. 2017. Artificial Intelligence and the Copyright Dilemma.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">IDEA: The IP Law Review, 57</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Hristov, K. (2017). Artificial Intelligence and the Copyright Dilemma. IDEA.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Hristov, K. (2017). Artificial Intelligence and the Copyright Dilemma. IDEA.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">HUGENHOLTZ, P. B. & QUINTAIS, J. P. 2021. Copyright and Artificial Creation: Does EU Law Protect AI Output?</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">IIC, 52, 1190-1216</div>
+            <div style="font-weight: bold;">HUGENHOLTZ, P. B. & QUINTAIS, J. P. 2021. Copyright and Artificial Creation: Does EU Copyright Law Protect AI Output?</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">IIC - International Review of IP & Competition Law, 52</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Hugenholtz & Quintais (2021). Copyright and Artificial Creation. IIC.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Hugenholtz & Quintais (2021). Copyright and Artificial Creation. IIC.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">IHALAINEN, J. 2018. Computer creativity: artificial intelligence and copyright.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Journal of Intellectual Property Law & Practice, 13</div>
+            <div style="font-weight: bold;">IHALAINEN, J. 2018. Computer creativity: artificial intelligence and copyright.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Journal of Intellectual Property Law & Practice, 13</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Ihalainen, J. (2018). Computer creativity: artificial intelligence and copyright.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Ihalainen, J. (2018). Computer creativity: artificial intelligence and copyright. JIPLP.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">KÄSTLE, V. M. & WOLFENSTÄTTER, T. 2023. Getty Images v. Stability AI: Copyright Challenges.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">DAJV Legal Analysis</div>
+            <div style="font-weight: bold;">KÄSTLE, V. M. & WOLFENSTÄTTER, T. 2023. Getty Images v. Stability AI: Copyright Challenges Related to Generative AI.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">DAJV Legal Analysis</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Kästle & Wolfenstätter (2023). Getty Images v. Stability AI.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Kästle & Wolfenstätter (2023). Getty Images v. Stability AI.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">LAVALLÉE, E. 2017. Intellectual Property and Artificial Intelligence.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Lavery IP Publications</div>
+            <div style="font-weight: bold;">LAVALLÉE, E. 2017. Intellectual Property and Artificial Intelligence.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Lavery IP Publications</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Lavallée, E. (2017). Intellectual Property and Artificial Intelligence.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Lavallée, E. (2017). Intellectual Property and Artificial Intelligence.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">MARCUS, G. & SOUTHEN, R. 2024. Generative AI Has a Visual Plagiarism Problem.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">IEEE Spectrum</div>
+            <div style="font-weight: bold;">MARCUS, G. & SOUTHEN, R. 2024. Generative AI Has a Visual Plagiarism Problem.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">IEEE Spectrum</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Marcus & Southen (2024). Generative AI Has a Visual Plagiarism Problem. IEEE Spectrum.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Marcus & Southen (2024). Generative AI Has a Visual Plagiarism Problem. IEEE Spectrum.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">NOVELLI, C., CASOLARI, F., HACKER, P., SPEDICATO, G. & FLORIDI, L. 2024. Generative AI in EU Law.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">ArXiv, abs/2401.07348</div>
+            <div style="font-weight: bold;">NOVELLI, C., CASOLARI, F., HACKER, P., SPEDICATO, G. & FLORIDI, L. 2024. Generative AI in EU Law.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">ArXiv, abs/2401.07348</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Novelli et al. (2024). Generative AI in EU Law. ArXiv.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Novelli et al. (2024). Generative AI in EU Law. ArXiv.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">POLAND, C. M. 2023. Generative AI and US Intellectual Property Law.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">ArXiv, abs/2311.16023</div>
+            <div style="font-weight: bold;">POLAND, C. M. 2023. Generative AI and US Intellectual Property Law.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">ArXiv, abs/2311.16023</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Poland, C. M. (2023). Generative AI and US Intellectual Property Law. ArXiv.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Poland, C. M. (2023). Generative AI and US Intellectual Property Law. ArXiv.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">RAMALHO, A. Q. R. N. 2019. Originality redux: analysis of originality in AI works.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">AIDA, 2-18</div>
+            <div style="font-weight: bold;">RAMALHO, A. Q. R. N. 2019. Originality redux: an analysis of the originality requirement in AI-generated works.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">AIDA, 2-18</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Ramalho, A. (2019). Originality redux in AI-generated works. AIDA.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Ramalho, A. (2019). Originality redux in AI-generated works. AIDA.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">SAMUELSON, P. 2024. How to Think about Remedies in Generative AI Copyright Cases.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Commun. ACM, 67, 27–30</div>
+            <div style="font-weight: bold;">SAMUELSON, P. 2024. How to Think about Remedies in the Generative AI Copyright Cases.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Commun. ACM, 67, 27–30</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Samuelson, P. (2024). How to Think about Remedies in Generative AI Cases. CACM.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Samuelson, P. (2024). How to Think about Remedies in Generative AI Copyright Cases.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">SARTOR, G., LAGIOA, F. & CONTISSA, G. 2018. Use of Copyrighted Works by AI Systems.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Art Works in the Data Mill</div>
+            <div style="font-weight: bold;">SARTOR, G., LAGIOA, F. & CONTISSA, G. 2018. The Use of Copyrighted Works by AI Systems: Art Works in the Data Mill.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Legal Reasoning and AI Systems</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Sartor et al. (2018). Art Works in the Data Mill.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Sartor et al. (2018). Art Works in the Data Mill.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">VARYTIMIDOU, C. 2023. The New A(I)rt Movement and Its Copyright Protection.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">GRUR International, 72</div>
+            <div style="font-weight: bold;">VARYTIMIDOU, C. 2023. The New A(I)rt Movement and Its Copyright Protection: Immoral or E-Moral?</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">GRUR International, 72</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Varytimidou, C. (2023). The New A(I)rt Movement. GRUR Int.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Varytimidou, C. (2023). The New A(I)rt Movement. GRUR Int.')">Copy Citation</button>
         </div>
 
-        <div class="bibo-item" data-tag="sec">
+        <div class="bibo-entry" data-tag="sec">
           <div>
             <span class="bibo-tag tag-sec">Secondary Source</span>
-            <div style="font-weight: 600; margin-top: 0.3rem;">ZHUK, A. 2024. Navigating the legal landscape of AI copyright: comparative analysis.</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">AI and Ethics, 4, 1299-1306</div>
+            <div style="font-weight: bold;">ZHUK, A. 2024. Navigating the legal landscape of AI copyright: a comparative analysis of EU, US, and Chinese approaches.</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">AI and Ethics, 4, 1299-1306</div>
           </div>
-          <button class="copy-btn" onclick="copyCitation(this, 'Zhuk, A. (2024). Navigating the legal landscape of AI copyright. AI and Ethics.')">Copy</button>
+          <button class="cite-copy-btn" onclick="copyCitation(this, 'Zhuk, A. (2024). Navigating the legal landscape of AI copyright. AI and Ethics.')">Copy Citation</button>
         </div>
 
       </div>
@@ -720,62 +772,62 @@
 
   </div>
 
+  <footer>
+    <p>JURIX 2026 Tutorial • Ruhi Anand Finn • ADAPT Centre, Trinity College Dublin</p>
+  </footer>
+
   <script>
-    // Accordion functionality
-    function toggleAccordion(headerElement) {
-      const body = headerElement.nextElementSibling;
+    // Toggle accordion elements
+    function toggleAccordion(header) {
+      const body = header.nextElementSibling;
       const isOpen = body.style.display === 'block';
       body.style.display = isOpen ? 'none' : 'block';
     }
 
-    // Policy Lab Quad Switching
-    const quadData = {
+    // Policy Lab Quad Content
+    const quadInfo = {
       artists: {
-        title: "🎨 Artists Quad Strategy",
-        text: "Focuses on defending visual styles, personal voice, and economic livelihoods. Advocates moving from current opt-out systems (e.g. Spawning / robots.txt) toward legally binding opt-in consent mechanisms, machine unlearning mechanisms, and direct licensing remuneration schemes."
+        title: "🎨 Artists Quad Governance Focus",
+        text: "Examines mechanisms to defend visual styles, moral rights, and creator compensation. Evaluates shifting from current opt-out models (Spawning, robots.txt) toward legally enforceable opt-in consent mechanisms, metadata provenance standards, machine unlearning mechanisms, and equitable remuneration funds."
       },
       developers: {
-        title: "💻 AI Developers Quad Strategy",
-        text: "Focuses on technical feasibility, training pipeline transparency, data provenance protocols (C2PA metadata standards), and calculating fair use risks under US common law vs. CJEU text and data mining exceptions."
+        title: "💻 AI Developers Quad Governance Focus",
+        text: "Focuses on technical feasibility, data provenance infrastructure (C2PA metadata protocols), dataset transparency obligations under Article 53 of the EU AI Act, and managing copyright liability risks across transatlantic training pipelines."
       },
       regulators: {
-        title: "⚖️ Regulators Quad Strategy",
-        text: "Focuses on monitoring compliance under the EU AI Act (Art. 53 copyright transparency obligations) and enforcement of Directive 2019/790 Article 4 TDM opt-outs across automated web scraping tools."
+        title: "⚖️ Regulators Quad Governance Focus",
+        text: "Focuses on enforcement and auditability under Directive (EU) 2019/790 Article 4 TDM opt-out exceptions, verifying automated web crawler compliance, and creating standardized oversight frameworks for general-purpose AI models."
       },
       policymakers: {
-        title: "🏛️ Policymakers Quad Strategy",
-        text: "Focuses on transatlantic policy harmonization, establishing statutory licensing mechanisms, creating equitable royalty distribution funds, and preventing market failure for independent creators."
+        title: "🏛️ Policymakers Quad Governance Focus",
+        text: "Focuses on harmonizing EU statutory exceptions with US common law Fair Use doctrine, structuring statutory licensing mechanisms, preventing systemic market failure for creative labor, and fostering sustainable AI innovation."
       }
     };
 
-    function switchQuad(quadKey, btnElement) {
-      document.querySelectorAll('.quad-btn').forEach(btn => btn.classList.remove('active'));
-      btnElement.classList.add('active');
-      const box = document.getElementById('quad-display');
-      box.innerHTML = `<h3 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">${quadData[quadKey].title}</h3><p style="color: var(--text-main);">${quadData[quadKey].text}</p>`;
+    function switchQuad(key, btn) {
+      document.querySelectorAll('.quad-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const container = document.getElementById('quadDisplay');
+      container.innerHTML = `<h3 style="color: var(--accent-navy); font-weight: normal; margin-bottom: 0.5rem;">${quadInfo[key].title}</h3><p style="color: var(--text-main);">${quadInfo[key].text}</p>`;
     }
     // Initialize default quad
     switchQuad('artists', document.querySelector('.quad-btn.active'));
 
-    // Filter Bibliography Search
+    // Filter bibliography search
     function filterBibo() {
       const query = document.getElementById('biboSearch').value.toLowerCase();
-      const items = document.querySelectorAll('.bibo-item');
+      const items = document.querySelectorAll('.bibo-entry');
       items.forEach(item => {
         const text = item.innerText.toLowerCase();
-        if (text.includes(query)) {
-          item.style.display = 'flex';
-        } else {
-          item.style.display = 'none';
-        }
+        item.style.display = text.includes(query) ? 'flex' : 'none';
       });
     }
 
-    // Filter Bibliography Category Tags
-    function filterBiboTag(tag, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    // Filter bibliography category tags
+    function filterTag(tag, btn) {
+      document.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const items = document.querySelectorAll('.bibo-item');
+      const items = document.querySelectorAll('.bibo-entry');
       items.forEach(item => {
         if (tag === 'all' || item.getAttribute('data-tag') === tag) {
           item.style.display = 'flex';
@@ -785,17 +837,17 @@
       });
     }
 
-    // Copy Citation
+    // Copy Citation Helper
     function copyCitation(btn, text) {
       navigator.clipboard.writeText(text);
       const originalText = btn.innerText;
       btn.innerText = 'Copied!';
-      btn.style.borderColor = '#10b981';
-      btn.style.color = '#10b981';
+      btn.style.color = 'var(--accent-sage)';
+      btn.style.borderColor = 'var(--accent-sage)';
       setTimeout(() => {
         btn.innerText = originalText;
-        btn.style.borderColor = 'var(--border-card)';
         btn.style.color = 'var(--text-muted)';
+        btn.style.borderColor = 'var(--border-warm)';
       }, 1500);
     }
   </script>
